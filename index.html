@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="styles.css">
     <title>Bibliotheque</title>
 </head>
-<body>
-    
-
+<body>  
+    <script>
+    </script>
+    <h1>Welcome to the Library!</h1>
+    <label>Book Title:
+        <input type='text' id='bookTitle' placeholder="Title">
+      </label> <br> <br>
+      <label>Author:
+        <input type='text' id='bookAuthor' placeholder="Author">
+      </label> <br> <br>
+      <label>Number of pages:
+        <input type='number' id='bookPages' placeholder="Pages">
+      </label> <br> <br>
+      <label>Have you read it? (true or false):
+        <input type='checkbox' id='bookRead'>
+      </label> <br> <br>
+    <button onClick="addBookToLibrary()">Add a new book</button><br><br>
+    Books:
+    <div id="displayBooks"></div>
     <script src="js-script.js"></script>
 </body>
 </html>
