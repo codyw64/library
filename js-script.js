@@ -37,17 +37,43 @@ function displayBooks(array) {
         newDiv.id = i;
         let object = element;
         for (let x in object) {
-            text += ( x + ": " + object[x] + ", ");
+            let newLine = document.createElement("p");
+            newLine.id = x + i;
+            newLine.textContent = ( x + ": " + object[x]);
+            newDiv.appendChild(newLine);
         }
         const newContent = document.createTextNode(text);
         newDiv.appendChild(newContent);
         container.appendChild(newDiv);
-        newDiv.addEventListener('click', (e) => {
+        newDiv.className = "displayBook";
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "delete this";
+        const changeReadButton = document.createElement("button");
+        changeReadButton.textContent = "change this books read status";
+        newDiv.appendChild(changeReadButton);
+        newDiv.appendChild(deleteButton);
+        deleteButton.addEventListener('click', (e) => {
             console.log(newDiv.id);
             let toBeRemoved = document.getElementById(newDiv.id);
             container.removeChild(toBeRemoved);
             myLibrary.splice(newDiv.id, 1);
             console.table(myLibrary);
+        })
+        changeReadButton.addEventListener('click', (e) => {
+            let newLine = document.createElement("p");
+            const toBeReplaced = document.getElementById("Read" + i);
+            newLine.id = "Read" + i;
+            console.log(array[i].Read);
+            if(array[i].Read == true) {
+                newLine.textContent = "Read: false";
+                array[i].Read = false;
+            } else if (array[i].Read == false) {
+                newLine.textContent = "Read: true";
+                array[i].Read = true;
+            }
+            console.log(array[1].Read);
+            newDiv.replaceChild(newLine, toBeReplaced);
+
         })
     }
 }
