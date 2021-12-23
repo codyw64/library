@@ -15,32 +15,26 @@ myLibrary.push(theHobbit);
 myLibrary.push(hungerGames);
 myLibrary.push(harryPotterFirst);
 
-const container = document.getElementById("displayBooks");
 
 function addBookToLibrary() {
     let temp = new book(document.getElementById("bookTitle").value, document.getElementById("bookAuthor").value, document.getElementById("bookPages").value, document.getElementById("bookRead").checked);
     myLibrary.push(temp);
-    const newDiv = document.createElement("div");
-    let object = temp;
-    let text = "";
-    for (let x in object) {
-        text += ( x + ": " + object[x] + ", ");
-    }
-    const newContent = document.createTextNode(text);
-    newDiv.appendChild(newContent);
-    container.appendChild(newDiv);
+    displayBooks(myLibrary);
 }
 
 function displayBooks(array) { 
+    const container = document.getElementById("displayBooks");
     if (container.hasChildNodes() == true) {
-        console.log("has children!");
-        return;
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
     }
-    console.log("doesnt have children");
+
     for (let i = 0; i < array.length; i++){
         let text = "";
         let element = array[i];
         const newDiv = document.createElement("div");
+        newDiv.id = i;
         let object = element;
         for (let x in object) {
             text += ( x + ": " + object[x] + ", ");
@@ -48,6 +42,13 @@ function displayBooks(array) {
         const newContent = document.createTextNode(text);
         newDiv.appendChild(newContent);
         container.appendChild(newDiv);
+        newDiv.addEventListener('click', (e) => {
+            console.log(newDiv.id);
+            let toBeRemoved = document.getElementById(newDiv.id);
+            container.removeChild(toBeRemoved);
+            myLibrary.splice(newDiv.id, 1);
+            console.table(myLibrary);
+        })
     }
 }
 
